@@ -44,7 +44,6 @@ pygame.display.set_icon(icon)
 
 player_x = 350
 player_y = 480
-x_change_player = 0
 
 # Creating Enemies
 # Multiple enemies will be used, so lists are used
@@ -89,11 +88,10 @@ def textLoad (text, x, y):
     SCREEN.blit(score, (x,y))
 
 def player_movement(key_pressed, player_x):
-    x_change_player = 0
-    if key_pressed[pygame.K_LEFT]:
+    if key_pressed[pygame.K_LEFT] and player_x>0:
         player_x -= PLAYER_VEL
 
-    if key_pressed[pygame.K_RIGHT]:
+    if key_pressed[pygame.K_RIGHT] and player_x<736:
         player_x += PLAYER_VEL
     
     return player_x
@@ -141,13 +139,6 @@ while running:
                     bullet_sound.play()
                     bullet_x = player_x #get current x co-ordinate of the spaceship
                     fireBullet(bullet_x, bullet_y)
-            
-
-    # making sure the player does not go out of bounds
-    if player_x <= 0:
-        player_x = 0
-    elif player_x >=736: #subtract 64 pixels (size of the image) from the total amount of pixels
-        player_x = 736
 
     # making sure the bullet persists until it reaches the boundary
     if bullet_state == 'Fire':
