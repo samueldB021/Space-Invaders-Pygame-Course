@@ -70,12 +70,7 @@ bullet_state = 'Ready'
 # For keeping track and displaying the score
 score = 0
 
-def display(player_x, player_y, score, no_enemies, enemy_img, enemy_x, enemy_y):
-    imageLoad (BACKGROUND, 0, 0)
-    imageLoad(PLAYER_IMG, player_x, player_y)
-    textLoad(score, SCORE_X, SCORE_Y)
-    for i in range (no_enemies):
-        imageLoad(enemy_img[i], enemy_x[i], enemy_y[i])
+
 
 # imageLoad: for loading up images using SCREEN.blit on the screen
 # takes in the file and the co-ordinates to display them in
@@ -86,6 +81,13 @@ def imageLoad(image, x, y):
 def textLoad (text, x, y):
     score = FONT.render("Score : "+str(text), True, (255, 255, 255))
     SCREEN.blit(score, (x,y))
+
+def display(player_x, player_y, score, no_enemies, enemy_img, enemy_x, enemy_y):
+    imageLoad (BACKGROUND, 0, 0)
+    imageLoad(PLAYER_IMG, player_x, player_y)
+    textLoad(score, SCORE_X, SCORE_Y)
+    for i in range (no_enemies):
+        imageLoad(enemy_img[i], enemy_x[i], enemy_y[i])
 
 def player_movement(key_pressed, player_x):
     if key_pressed[pygame.K_LEFT] and player_x>0:
@@ -108,6 +110,7 @@ def resetBullet():
     global bullet_y
     bullet_state = 'Ready'
     bullet_y = 480
+
 
 # collisionDetector: to detect collisions
 def collisionDetector (x1, y1, x2, y2):
